@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 public class JobController {
@@ -17,21 +18,21 @@ public class JobController {
     }
 
     @GetMapping("/jobs")
-    public List<Job> findAll(){
-        return jobService.findAll();
+    public ResponseEntity<List<Job>> findAll(){
+        return new ResponseEntity<>(jobService.findAll(), HttpStatus.OK);
     }
 
     @PostMapping("/jobs")
-    public String createJob(@RequestBody Job job){
+    public ResponseEntity<String> createJob(@RequestBody Job job){
         jobService.createJob(job);
-        return "Job added successfully";
+        return new ResponseEntity<>("Job added successfully", HttpStatus.CREATED);
     }
 
     @GetMapping("/jobs/{id}")
     public ResponseEntity<Job> getJobById(@PathVariable  Long id){
         Job job = jobService.getJobById(id);
-        if(job == null){
-            return new ResponseEntity<>(new Job(132L, "NO JOBS", "HEHE"), HttpStatus.NOT_FOUND);
+        if(Objects.isNull(job)){
+            return new ResponseEntity<>(new Job(), HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(job, HttpStatus.OK);
     }

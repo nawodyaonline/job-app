@@ -17,7 +17,7 @@ public class Job {
         this.location = location;
     }
 
-    public Job(long id, String noJobs, String hehe) {
+    public Job() {
 
     }
 
