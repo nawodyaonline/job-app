@@ -1,1 +1,3 @@
-spring.application.name=jobapp
+spring:
+  application:
+    name: job-app
