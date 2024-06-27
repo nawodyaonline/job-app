@@ -27,4 +27,24 @@ public class JobServiceImpl implements JobService {
     public Job getJobById(Long id) {
         return jobs.stream().filter(j -> j.getId().equals(id)).findFirst().orElse(null);
     }
+
+    @Override
+    public boolean deleteJobById(Long id) {
+        return jobs.removeIf(j -> j.getId().equals(id));
+    }
+
+    @Override
+    public boolean updateJob(long id, Job updatedJob) {
+        for (Job job : jobs) {
+            if (job.getId().equals(id)) {
+                job.setTitle(updatedJob.getTitle());
+                job.setDescription(updatedJob.getDescription());
+                job.setMinSalary(updatedJob.getMinSalary());
+                job.setMaxSalary(updatedJob.getMaxSalary());
+                job.setLocation(updatedJob.getLocation());
+                return true;
+            }
+        }
+        return false;
+    }
 }

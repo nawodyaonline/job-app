@@ -1,6 +1,7 @@
 package com.incognito.jobapp.job;
 
 
+import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,5 +36,21 @@ public class JobController {
             return new ResponseEntity<>(new Job(), HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(job, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/jobs/{id}")
+    public ResponseEntity<String> deleteJobById(@PathVariable Long id){
+        boolean isDelete = jobService.deleteJobById(id);
+        if (isDelete) return new ResponseEntity<>(
+                "Job deleted successfully", HttpStatus.OK
+        );
+        else return new ResponseEntity<>("Job not found", HttpStatus.NOT_FOUND);
+    }
+
+    @PutMapping("/jobs/{id}")
+    public ResponseEntity<String> updateJob(@PathVariable long id, @RequestBody Job job){
+        boolean isUpdate = jobService.updateJob(id, job);
+        if(isUpdate) return new ResponseEntity<>("Job updated successfully", HttpStatus.OK);
+        else return new ResponseEntity<>("Job not found", HttpStatus.NOT_FOUND);
     }
 }
