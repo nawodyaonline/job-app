@@ -2,6 +2,7 @@ package com.incognito.jobapp.company;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.incognito.jobapp.job.Job;
+import com.incognito.jobapp.review.Review;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -18,6 +19,9 @@ public class Company {
     @JsonIgnore
     @OneToMany(mappedBy = "company")
     private List<Job> jobs;
+
+    @OneToMany(mappedBy = "company")
+    private List<Review> reviews;
 
     //TODO: pivate List<Review> revies;
 
