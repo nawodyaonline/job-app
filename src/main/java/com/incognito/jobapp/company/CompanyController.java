@@ -16,14 +16,19 @@ public class CompanyController {
     }
 
     @GetMapping
-    public List<Company> getAllCompanies() {
-        return companyService.getAllCompanies();
+    public ResponseEntity<List<Company>> getAllCompanies() {
+        return new ResponseEntity<>(companyService.getAllCompanies(), HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> update(@RequestBody Company company, @RequestParam Long id) {
+    public ResponseEntity<String> update(@RequestBody Company company, @PathVariable Long id) {
         companyService.updateCompany(company, id);
         return new ResponseEntity<>("Update successfully!", HttpStatus.OK);
+    }
+
+    @PostMapping
+    public ResponseEntity<String> create(@RequestBody Company company) {        ;
+        return new ResponseEntity<>("Create successfully! " + companyService.createCompany(company).toString(), HttpStatus.CREATED);
     }
 
 }

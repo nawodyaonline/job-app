@@ -3,7 +3,6 @@ package com.incognito.jobapp.company.impl;
 import com.incognito.jobapp.company.Company;
 import com.incognito.jobapp.company.CompanyRepository;
 import com.incognito.jobapp.company.CompanyService;
-import com.incognito.jobapp.job.Job;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,11 +28,11 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public Company createCompany(Company company) {
-        return null;
+        return companyRepository.save(company);
     }
 
     @Override
-    public boolean updateCompany(Company company, Long id) {
+    public void updateCompany(Company company, Long id) {
         Optional<Company> companyOptional = companyRepository.findById(id);
         if(companyOptional.isPresent()) {
             Company companyToUpdate = companyOptional.get();
@@ -41,6 +40,5 @@ public class CompanyServiceImpl implements CompanyService {
             companyToUpdate.setDescription(company.getDescription());
             companyRepository.save(companyToUpdate);
         }
-        return false;
     }
 }
