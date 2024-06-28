@@ -1,6 +1,8 @@
 package com.incognito.jobapp.job;
 
 
+import com.incognito.jobapp.company.Company;
+import com.incognito.jobapp.company.CompanyService;
 import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

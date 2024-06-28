@@ -31,4 +31,10 @@ public class CompanyController {
         return new ResponseEntity<>("Create successfully! " + companyService.createCompany(company).toString(), HttpStatus.CREATED);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> delete(@PathVariable Long id) {
+        companyService.deleteCompanyById(id);
+        return new ResponseEntity<>("Delete successfully!", HttpStatus.OK);
+    }
+
 }
