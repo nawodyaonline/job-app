@@ -23,7 +23,13 @@ public class Company {
     @OneToMany(mappedBy = "company")
     private List<Review> reviews;
 
-    //TODO: pivate List<Review> revies;
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
+    }
 
     public Company() {}
 
