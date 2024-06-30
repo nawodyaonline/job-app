@@ -11,3 +11,23 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+
+#Actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    shutdown:
+      enabled: true
+    health:
+      show-details: always
+  info:
+    env:
+      enabled: true
+info:
+  app:
+    name: Spring boot
+    description: hello
+    version: 1.1.1
